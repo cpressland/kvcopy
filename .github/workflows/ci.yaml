@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    tags: ['v[0-9]+.[0-9]+.[0-9]+']
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: pip install ruff
+      - run: ruff check .
+
+  publish:
+    if: github.event_name == 'push'
+    name: publish
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: |
+          pip install poetry
+          poetry self add "poetry-dynamic-versioning[plugin]"
+          poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+      - run: |
+          poetry build
+      - run: |
+          poetry publish

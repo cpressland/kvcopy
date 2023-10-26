@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "kvcopy"
+version = "0.0.0"
+description = "Copys Secrets from one Azure Key Vault to another"
+authors = ["Chris Pressland <mail@cpressland.io>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.scripts]
+kvcopy = "kvcopy:cli"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+click = "^8.1.7"
+azure-keyvault = "^4.2.0"
+azure-identity = "^1.14.1"
+
+[tool.ruff]
+select = ["ALL"]
+line-length = 88
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.2"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
+build-backend = "poetry_dynamic_versioning.backend"
