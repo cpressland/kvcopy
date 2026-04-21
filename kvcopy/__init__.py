@@ -1,11 +1,12 @@
 """Main module for kvcopy project."""
 
+from typing import Annotated
+
 import typer
 from azure.core.exceptions import ResourceNotFoundError, ServiceRequestError
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 from loguru import logger
-from typing_extensions import Annotated
 
 cli = typer.Typer()
 
