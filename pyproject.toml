@@ -17,7 +17,7 @@ typer = { extras = ["all"], version = "^0.24.0" }
 loguru = "^0.7.2"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.6.0"
+ruff = "^0.15.0"
 
 [tool.ruff]
 line-length = 120
